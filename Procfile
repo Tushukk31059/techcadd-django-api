@@ -1,1 +1,1 @@
-web: gunicorn techcadd_backend.wsgi
+web: gunicorn techcadd_backend.wsgi:application
