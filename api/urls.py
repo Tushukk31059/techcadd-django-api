@@ -1,7 +1,8 @@
-from rest_framework import routers
+from django.urls import path
 from .views import EnquiryViewSet
+from rest_framework.routers import DefaultRouter
 
-router = routers.DefaultRouter()
-router.register('enquiry', EnquiryViewSet)
+router = DefaultRouter()
+router.register(r'enquiry', EnquiryViewSet, basename='enquiry')
 
 urlpatterns = router.urls

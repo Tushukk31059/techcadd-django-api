@@ -1,4 +1,5 @@
 #!/bin/bash
-python manage.py migrate --noinput
+python manage.py makemigrations
+python manage.py migrate
 python manage.py collectstatic --noinput
-gunicorn techcadd_backend.wsgi
+gunicorn techcadd_backend.wsgi:application
