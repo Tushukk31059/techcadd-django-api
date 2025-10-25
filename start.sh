@@ -1,9 +1,12 @@
 #!/bin/bash
-echo "🟡 Running Django migrations..."
-python manage.py makemigrations --noinput
-python manage.py migrate --noinput && gunicorn techcadd_backend.wsgi --bind 0.0.0.0:$PORT
-# python manage.py migrate --noinput
+echo "🟡 Running setup commands..."
+
+# 1. Run migrations to create the table
+python manage.py migrate --noinput
+
+# 2. Collect static files
 python manage.py collectstatic --noinput
-echo "✅ Migrations done, starting Gunicorn..."
-gunicorn techcadd_backend.wsgi:application
-# python manage.py migrate --noinput && gunicorn techcadd_backend.wsgi --bind 0.0.0.0:$PORT
+
+# 3. Start the Gunicorn server (This must be the final line)
+echo "✅ Setup done. Starting Gunicorn..."
+gunicorn techcadd_backend.wsgi --bind 0.0.0.0:$PORT
